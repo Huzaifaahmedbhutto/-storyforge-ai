@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StoryForge AI v2 — Craft Worlds With Words</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=Noto+Nastaliq+Urdu:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="bg-orbs">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+</div>
+<canvas id="particles"></canvas>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">
+    <span class="logo-icon">✦</span>
+    <span class="logo-text">StoryForge <em>AI</em></span>
+    <span class="version-badge">v2.0</span>
+  </div>
+  <div class="header-center">
+    <button class="lang-toggle" id="langToggle" onclick="toggleLanguage()">
+      <span id="langIcon">🌍</span>
+      <span id="langLabel">اردو</span>
+    </button>
+  </div>
+  <div class="header-right">
+    <button class="sound-btn" id="soundBtn" onclick="toggleSound()" title="Ambient Sound">
+      🔇
+    </button>
+    <button class="history-btn" onclick="openHistory()">📖 History</button>
+    <div class="header-badge">
+      <span class="pulse-dot"></span>
+      GitHub Copilot
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow" id="heroEyebrow">Microsoft Agents League Hackathon 2026</p>
+  <h1 class="hero-title">
+    <span id="heroLine1">Craft Worlds</span><br/>
+    <span class="gradient-text" id="heroLine2">With Words</span>
+  </h1>
+  <p class="hero-sub" id="heroSub">Enter a spark of imagination. StoryForge AI weaves it into a full narrative — in seconds.</p>
+</section>
+
+<!-- SOUND AMBIENT BAR -->
+<div class="ambient-bar" id="ambientBar" style="display:none">
+  <span class="ambient-label">🎵 Ambient</span>
+  <div class="sound-options">
+    <button class="sound-opt active" data-sound="forest" onclick="selectSound('forest')">🌲 Forest</button>
+    <button class="sound-opt" data-sound="rain" onclick="selectSound('rain')">🌧️ Rain</button>
+    <button class="sound-opt" data-sound="ocean" onclick="selectSound('ocean')">🌊 Ocean</button>
+    <button class="sound-opt" data-sound="fire" onclick="selectSound('fire')">🔥 Fire</button>
+    <button class="sound-opt" data-sound="space" onclick="selectSound('space')">🚀 Space</button>
+  </div>
+  <input type="range" id="volumeSlider" min="0" max="100" value="30" oninput="setVolume(this.value)"/>
+</div>
+
+<!-- MAIN APP -->
+<main class="app-container">
+
+  <!-- LEFT PANEL -->
+  <div class="panel panel-left">
+    <div class="panel-label" id="labelLeft">YOUR IMAGINATION</div>
+
+    <!-- Character Name -->
+    <div class="field-group">
+      <label id="labelCharacter">🎭 Character Name</label>
+      <input type="text" id="characterInput" placeholder="e.g. Zara, Marcus, Elena..." maxlength="30"/>
+    </div>
+
+    <!-- Story Premise -->
+    <div class="field-group">
+      <label id="labelPremise">Story Premise</label>
+      <textarea id="topicInput" placeholder="e.g. A lone astronaut discovers a signal from 1977 still echoing through deep space..." rows="3"></textarea>
+      <div class="char-counter"><span id="charCount">0</span> / 300</div>
+    </div>
+
+    <!-- Genre -->
+    <div class="field-group">
+      <label id="labelGenre">Genre</label>
+      <div class="genre-grid">
+        <button class="genre-btn active" data-genre="adventure">⚔️ <span id="g1">Adventure</span></button>
+        <button class="genre-btn" data-genre="scifi">🚀 <span id="g2">Sci-Fi</span></button>
+        <button class="genre-btn" data-genre="horror">👁️ <span id="g3">Horror</span></button>
+        <button class="genre-btn" data-genre="romance">🌹 <span id="g4">Romance</span></button>
+        <button class="genre-btn" data-genre="fantasy">🔮 <span id="g5">Fantasy</span></button>
+        <button class="genre-btn" data-genre="mystery">🕵️ <span id="g6">Mystery</span></button>
+      </div>
+    </div>
+
+    <!-- Length -->
+    <div class="field-group">
+      <label id="labelLength">Story Length</label>
+      <div class="length-slider-wrap">
+        <input type="range" id="lengthSlider" min="1" max="3" value="2" step="1"/>
+        <div class="slider-labels">
+          <span id="sl1">Flash</span><span id="sl2">Short</span><span id="sl3">Epic</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tone -->
+    <div class="field-group">
+      <label id="labelTone">Narrative Tone</label>
+      <div class="tone-row">
+        <button class="tone-btn active" data-tone="cinematic" id="t1">Cinematic</button>
+        <button class="tone-btn" data-tone="lyrical" id="t2">Lyrical</button>
+        <button class="tone-btn" data-tone="gritty" id="t3">Gritty</button>
+        <button class="tone-btn" data-tone="whimsical" id="t4">Whimsical</button>
+      </div>
+    </div>
+
+    <button class="generate-btn" id="generateBtn" onclick="generateStory()">
+      <span class="btn-icon">✦</span>
+      <span class="btn-text" id="btnText">Forge My Story</span>
+      <span class="btn-shimmer"></span>
+    </button>
+
+    <div class="stats-row" id="statsRow" style="display:none">
+      <div class="stat"><span id="wordCount">0</span><small id="statW">words</small></div>
+      <div class="stat"><span id="readTime">0</span><small id="statR">min read</small></div>
+      <div class="stat"><span id="sentCount">0</span><small id="statS">sentences</small></div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="panel panel-right">
+    <div class="panel-label" id="labelRight">YOUR STORY</div>
+
+    <div class="story-header" id="storyHeader" style="display:none">
+      <div class="story-meta">
+        <span class="story-genre-tag" id="storyGenreTag"></span>
+        <span class="story-tone-tag" id="storyToneTag"></span>
+      </div>
+      <div class="story-actions">
+        <button class="action-btn" onclick="copyStory()">📋</button>
+        <button class="action-btn" onclick="downloadStory()">⬇️</button>
+        <button class="action-btn" onclick="saveToHistory()">💾</button>
+        <button class="action-btn" onclick="shareStory()">🔗</button>
+      </div>
+    </div>
+
+    <!-- Cover Image -->
+    <div class="cover-image-box" id="coverImageBox" style="display:none">
+      <canvas id="coverCanvas" width="600" height="200"></canvas>
+    </div>
+
+    <!-- Rating -->
+    <div class="rating-box" id="ratingBox" style="display:none">
+      <span id="ratingLabel">Rate this story:</span>
+      <div class="stars">
+        <span class="star" onclick="rateStory(1)">★</span>
+        <span class="star" onclick="rateStory(2)">★</span>
+        <span class="star" onclick="rateStory(3)">★</span>
+        <span class="star" onclick="rateStory(4)">★</span>
+        <span class="star" onclick="rateStory(5)">★</span>
+      </div>
+      <span class="rating-value" id="ratingValue"></span>
+    </div>
+
+    <div class="story-output" id="storyOutput">
+      <div class="empty-state">
+        <div class="empty-icon">✦</div>
+        <p id="emptyText">Your story will appear here</p>
+        <small id="emptySmall">Choose a genre, set the tone, and forge your narrative</small>
+      </div>
+    </div>
+
+    <div class="loading-state" id="loadingState" style="display:none">
+      <div class="forge-animation">
+        <div class="forge-ring"></div>
+        <div class="forge-ring ring2"></div>
+        <div class="forge-ring ring3"></div>
+        <span class="forge-icon">✦</span>
+      </div>
+      <p class="loading-text" id="loadingText">Weaving your narrative...</p>
+    </div>
+  </div>
+</main>
+
+<!-- HISTORY MODAL -->
+<div class="modal-overlay" id="historyModal" style="display:none" onclick="closeHistory(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="historyTitle">📖 Story History</h2>
+      <button class="modal-close" onclick="closeHistoryBtn()">✕</button>
+    </div>
+    <div class="modal-body" id="historyList">
+      <p class="no-history" id="noHistoryText">No stories saved yet.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="clear-btn" onclick="clearHistory()" id="clearBtn">🗑️ Clear All</button>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>Built with <span>♥</span> using GitHub Copilot · Microsoft Agents League Hackathon 2026 · <strong>StoryForge AI</strong></p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
