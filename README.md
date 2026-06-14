@@ -117,72 +117,8 @@ All in one unified platform.
 
 ---
 
-## 📌 How to Run
+## 👨‍💻 Author
 
-```bash
-npm install
-npm run dev
-
-
----
-
-# 🎤 Demo Script (Hackathon Presentation)
-
-Use this while recording / presenting:
-
----
-
-## 🎬 1. Introduction
-“StoryForge AI is a cinematic AI storytelling platform that turns simple ideas into full narrative experiences.”
-
----
-
-## 🧠 2. Forge Mode Demo
-“I enter a simple story idea…”
-
-👉 Show input  
-👉 Click generate  
-
-“AI instantly generates a full cinematic story with tone control and genre selection.”
-
----
-
-## 🎭 3. Director Agent
-“Now I activate Director Agent — this simulates a real movie production pipeline.”
-
-Explain:
-- Blueprint (character + plot)
-- Story generation
-- Critique + improvement
-
----
-
-## ⚠️ 4. Mention Optimization
-“To optimize cost and avoid API limits, we reduced AI pipeline from 7 calls to 3 calls.”
-
----
-
-## 🌍 5. Extra Features
-- Urdu support
-- Story library
-- Export/share
-- Story analytics
-
----
-
-## 🏁 6. Closing
-“StoryForge AI is not just a story generator — it's an AI-powered creative director.”
-
----
-
-# 🚀 Final Advice
-
-👉 Ab bas:
-- README paste karo
-- GitHub update karo
-- Demo record karo
-- Submit kar do
-
----
-
-Agar chaho to main tumhare liye **:contentReference[oaicite:0]{index=0}** bhi bana deta hoon.
+Huzaifa Ahmed  
+AI Developer | Builder of StoryForge AI  
+GitHub: https://github.com/Huzaifaahmedbhutto
