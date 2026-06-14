@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ✦ StoryForge AI — Craft Worlds With Words
 
 > Microsoft Agents League Hackathon 2026 · Creative Apps Track
@@ -25,3 +26,6 @@ python -m http.server 8000
 Huzaifa Ahmed Bhutto
 - GitHub: https://github.com/Huzaifaahmedbhutto
 - LinkedIn: https://www.linkedin.com/in/huzaifa-ahmed-bhutto-880441317
+=======
+# -storyforge-ai
+>>>>>>> bed27898e4507691567c6397e2b0f84f3e7d8ee2
